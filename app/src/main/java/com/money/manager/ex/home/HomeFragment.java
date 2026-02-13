@@ -354,15 +354,24 @@ public class HomeFragment
                 TextView txtExpenses = getActivity().findViewById(R.id.textViewExpenses);
                 TextView txtDifference = getActivity().findViewById(R.id.textViewDifference);
                 // set value
-                if (txtIncome != null)
-                    txtIncome.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
-                            MoneyFactory.fromDouble(income)));
-                if (txtExpenses != null)
-                    txtExpenses.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
-                            MoneyFactory.fromDouble(Math.abs(expenses))));
-                if (txtDifference != null)
-                    txtDifference.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
-                            MoneyFactory.fromDouble(income - Math.abs(expenses))));
+                if(mHideReconciled) {
+                    if (txtIncome != null)
+                        txtIncome.setText("****");
+                    if (txtExpenses != null)
+                        txtExpenses.setText("****");
+                    if (txtDifference != null)
+                        txtDifference.setText("****");
+                } else {
+                    if (txtIncome != null)
+                        txtIncome.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
+                                MoneyFactory.fromDouble(income)));
+                    if (txtExpenses != null)
+                        txtExpenses.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
+                                MoneyFactory.fromDouble(Math.abs(expenses))));
+                    if (txtDifference != null)
+                        txtDifference.setText(mCurrencyService.getCurrencyFormatted(mCurrencyService.getBaseCurrencyId(),
+                                MoneyFactory.fromDouble(income - Math.abs(expenses))));
+                }
                 // manage progressbar
                 final ProgressBar barIncome = getActivity().findViewById(R.id.progressBarIncome);
                 final ProgressBar barExpenses = getActivity().findViewById(R.id.progressBarExpenses);
@@ -614,12 +623,15 @@ public class HomeFragment
         }
         // remove footer
         mExpandableListView.removeFooterView(linearFooter);
-        // set text
-        txtTotalAccounts.setText(mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(curTotal)));
-        txtFooterSummary.setText(txtTotalAccounts.getText());
+
         if(!mHideReconciled) {
+            txtTotalAccounts.setText(mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(curTotal)));
             txtFooterSummaryReconciled.setText(mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(curReconciled)));
+        } else {
+            txtTotalAccounts.setText("****");
         }
+        // set text
+        txtFooterSummary.setText(txtTotalAccounts.getText());
         // add footer
         mExpandableListView.addFooterView(linearFooter, null, false);
     }

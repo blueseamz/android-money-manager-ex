@@ -140,11 +140,14 @@ public class HomeAccountsExpandableAdapter
         QueryAccountBills total = mTotalsByType.get(accountType);
         if (total != null) {
             // set account type value
-            String totalDisplay = mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(total.getTotalBaseConvRate()));
-            holder.txtAccountTotal.setText(totalDisplay);
             if(!mHideReconciled) {
+                String totalDisplay = mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(total.getTotalBaseConvRate()));
+                holder.txtAccountTotal.setText(totalDisplay);
                 String reconciledDisplay = mCurrencyService.getBaseCurrencyFormatted(MoneyFactory.fromDouble(total.getReconciledBaseConvRate()));
                 holder.txtAccountReconciled.setText(reconciledDisplay);
+            } else {
+                holder.txtAccountTotal.setText("****");
+                holder.txtAccountReconciled.setVisibility(View.GONE);
             }
             // set account name
             holder.txtAccountName.setText(total.getAccountName());
@@ -217,15 +220,14 @@ public class HomeAccountsExpandableAdapter
 
         // set account name
         holder.txtAccountName.setText(account.getAccountName());
-        // import formatted
-        String value = mCurrencyService.getCurrencyFormatted(account.getCurrencyId(), MoneyFactory.fromDouble(account.getTotal()));
-        // set amount value
-        holder.txtAccountTotal.setText(value);
 
-        // reconciled
+        // amount value & reconciled
         if(mHideReconciled) {
             holder.txtAccountReconciled.setVisibility(View.GONE);
+            holder.txtAccountTotal.setText("***");
         } else {
+            String value = mCurrencyService.getCurrencyFormatted(account.getCurrencyId(), MoneyFactory.fromDouble(account.getTotal()));
+            holder.txtAccountTotal.setText(value);
             value = mCurrencyService.getCurrencyFormatted(account.getCurrencyId(), MoneyFactory.fromDouble(account.getReconciled()));
             holder.txtAccountReconciled.setText(value);
         }
