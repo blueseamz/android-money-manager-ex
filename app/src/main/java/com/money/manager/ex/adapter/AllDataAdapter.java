@@ -229,6 +229,9 @@ public class AllDataAdapter
 
         // Payee
         String payee = getPayeeName(cursor, isTransfer);
+        if(!payee.startsWith("[")){
+            payee = "[%]  ".replace("%", cursor.getString(cursor.getColumnIndexOrThrow(ACCOUNTNAME))) + payee;
+        }
         holder.txtPayee.setText(payee);
 
         // compose category description
