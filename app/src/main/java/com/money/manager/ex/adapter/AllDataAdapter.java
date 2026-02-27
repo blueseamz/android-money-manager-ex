@@ -229,7 +229,9 @@ public class AllDataAdapter
 
         // Payee
         String payee = getPayeeName(cursor, isTransfer);
-        if(!payee.startsWith("[")){
+        if(isTransfer){  // transfer mode
+            payee = String.format("[%s] -> [%s]", cursor.getString(cursor.getColumnIndexOrThrow(ACCOUNTNAME)), cursor.getString(cursor.getColumnIndexOrThrow(TOACCOUNTNAME)));
+        } else {    // normal mode
             payee = "[%]  ".replace("%", cursor.getString(cursor.getColumnIndexOrThrow(ACCOUNTNAME))) + payee;
         }
         holder.txtPayee.setText(payee);
