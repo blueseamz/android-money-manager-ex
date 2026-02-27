@@ -46,7 +46,7 @@ public class SearchActivity
     /**
      * Indicates whether to show the account headers in search results.
      */
-    public boolean ShowAccountHeaders = true;
+    public boolean ShowAccountHeaders = false;
 
 	private boolean mIsDualPanel = false;
     private SearchParametersFragment mSearchParametersFragment;
@@ -203,7 +203,7 @@ public class SearchActivity
         //set arguments
         searchResultsFragment.getArguments().putAll(args);
 
-        this.ShowAccountHeaders = true;
+        this.ShowAccountHeaders = false;
 
         //add fragment
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
