@@ -197,9 +197,13 @@ public class SearchActivity
         args.putString(AllDataListFragment.KEY_ARGUMENTS_WHERE, where);
 
         // Sorting
+//        args.putString(AllDataListFragment.KEY_ARGUMENTS_SORT,
+//                QueryAllData.TOACCOUNTID + ", " + QueryAllData.Date + ", " +
+//                        QueryAllData.TransactionType + ", " + QueryAllData.ID);
+        // only for my habit
         args.putString(AllDataListFragment.KEY_ARGUMENTS_SORT,
-                QueryAllData.TOACCOUNTID + ", " + QueryAllData.Date + ", " +
-                        QueryAllData.TransactionType + ", " + QueryAllData.ID);
+                QueryAllData.Date + " DESC, " + QueryAllData.ID + " DESC");
+
         //set arguments
         searchResultsFragment.getArguments().putAll(args);
 

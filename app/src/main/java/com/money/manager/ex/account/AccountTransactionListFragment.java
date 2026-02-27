@@ -709,9 +709,9 @@ public class AccountTransactionListFragment
         // create a bundle to returns
 
         String sortArgument = QueryAllData.Date + " DESC, ";
-        if (mSortTransactionsByType) {
-            sortArgument += QueryAllData.TransactionType + ", ";
-        }
+//        if (mSortTransactionsByType) {
+//            sortArgument += QueryAllData.TransactionType + ", ";
+//        }
         sortArgument += QueryAllData.ID + " DESC";
 
         Bundle args = new Bundle();
