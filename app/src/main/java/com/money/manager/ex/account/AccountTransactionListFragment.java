@@ -916,6 +916,9 @@ public class AccountTransactionListFragment
 
         getActivity().invalidateOptionsMenu();
 
+        if (this.viewHolder.txtAccountBalance != null) {
+            this.viewHolder.txtAccountBalance.setVisibility(mHideReconciled ? View.GONE : View.VISIBLE);
+        }
         if (this.viewHolder.txtAccountReconciled != null) {
             this.viewHolder.txtAccountReconciled.setVisibility(mHideReconciled ? View.GONE : View.VISIBLE);
         }
